@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dynamic Menu</title>
+  <link rel="stylesheet" href="cc_style.css">
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<body>
+  <header>
+   
+    <img src="Avator/Logo.png" alt="InternLink Logo" class="logo">
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="index.html#courses">Courses</a></li>
+        <li><a href="#" id="openContact">Contact</a></li>
+        <li><a href="#"><img src="Avator/profile.png" alt="AnonyHackz profile" class="profile"></a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="main-layout">
+    <div class="topics" id="topics">
+      <div class="menu-mobile__list-container">
+        <div class="sticky-header">Course Home</div>
+        <ul id="menuList" class="menu-mobile__list">
+          <!-- List items go here -->
+        </ul>
+      </div>
+    </div>
+    <section class="content">
+      <h1 style="color: blue; text-align: center; justify-content: center;" >Cloud Computing Syllabus</h1>
+<h1 style="text-align: justify">
+  <span style="color: #c0392b"
+    >Syllabus to be covered in Cloud Computing Course</span
+  >
+</h1>
+<h2 style="text-align: justify">Cloud Computing Introduction&nbsp;</h2>
+<p style="text-align: justify">
+  Client Side History – Server Side History – Why cloud computing – Why Cloud
+  computing in IOT – Cloud Computing Types – Advantages and Disadvantages of
+  Cloud Computing – Cloud Computing Uses – Cloud Computing Tech wise History –
+  Cloud Computing Introduction , Advantages and Disadvantages of Cloud Computing
+  , History of Cloud Computing , Web hosting Vs Cloud Hosting&nbsp;
+</p>
+<h2 style="text-align: justify">History of the Cloud Computing</h2>
+<p style="text-align: justify">
+  Why the word Cloud Computing – What’s there in the Cloud – Cloud Computing vs
+  Cost – Cloud Computing Types – Cloud Computing Benefits – Cloud Computing
+  Classification – Private Cloud vs Public Cloud – What is Private Cloud – What
+  is Public Cloud – What is Hybrid Cloud – Cloud in the real time world – PAAS
+  vs IAAS vs SAAS – On-premise Infrastructure vs Infrastructure as a service –
+  Top Cloud providers – AWS Intro – What is Web Service ? – How Web Service
+  works ? – Real time web service examples – Web services Vs REST API &nbsp;–
+  AWS Services Intro – How to create account and access account in cloud
+  server&nbsp;
+</p>
+<h2 style="text-align: justify">AWS&nbsp;</h2>
+<p style="text-align: justify">
+  AWS Overview – Why AWS – AWS Services – Storage based services – Static
+  Website Hosting based services – Dynamic Website Hosting based services –
+  Relational databases – NoSQL Databases – Network Creation based services – AWS
+  Resource manage services&nbsp;
+</p>
+<h2 style="text-align: justify">AWS Storage &amp; CDN Services</h2>
+<p style="text-align: justify">
+  AWS Storage and CDN – Aws S3 bucket – Elastic Block Store – Amazon cloud front
+  – AWS Glacier – AWS Storage Gateway – AWS Import Export&nbsp;
+</p>
+<h2 style="text-align: justify">Networking Services</h2>
+<p style="text-align: justify">
+  Auto Scaling – Elastic Load Balancing – Amazon WorkSpace – Amazon virtual
+  private cloud (amazon vpc) – AWS Route 53&nbsp; – Amazon Direct Connect –
+  Computation Services –&nbsp; AWS EC2&nbsp;
+</p>
+<h2 style="text-align: justify">AWS&nbsp;Database</h2>
+<p style="text-align: justify">
+  What is NoSQL Database – What is JSON – Dynamodb – AWS Nosql Database – AWS
+  ElastiCache – What is Relational Database – AWS RDS – Amazon Redshift – Amazon
+  Snowball / Amazon Migration services – rds proxy – Rds Mirroring and
+  replication&nbsp;
+</p>
+<h2 style="text-align: justify">AWS&nbsp;Appservices</h2>
+<p style="text-align: justify">
+  AWS cloudSearch – aws Elastic Transcoder – Amazon email sending services – AWS
+  SES – AWS SNS – Push notification services – AWS SQS – Message Queue Service –
+  AWS SWF – Workflow Service – AWS AppStream
+</p>
+<h2 style="text-align: justify">AWS&nbsp;Deployment and Management</h2>
+<p style="text-align: justify">
+  AWS CloudFormation – AWS CloudWatch – AWS Elastic Beanstalk – AWS IAM – AWS
+  CloudTrail – AWS OpsWorks – AWS CloudHSM&nbsp;
+</p>
+
+    </section>
+  </div>
+
+  <section id="contactModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h3>Contact Us</h3>
+        <form>
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+          <textarea placeholder="Your Message" required></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    
+  </section>
+
+
+
+
+
+  <footer style="text-align: center;">
+    <img src="Avator/Logo_footer.png" alt="AnonyHackz Logo" class="logo_footer">
+    <br>
+    <a href="mailto:anonyhackz741@gmail.com" style="text-decoration: none; color: blanchedalmond;">anonyhackz741@gmail.com</a>
+    <p>&copy; 2025 AnonyHackz. All rights reserved.</p>
+  </footer>
+
+
+    <script>
+      fetch('http://localhost:3000/CC')
+        .then(res => res.json())
+        .then(menuItems => {
+          const list = document.getElementById('menuList');
+          menuItems.forEach(item => {
+            const li = document.createElement('li');
+            li.className = 'menu-mobile__item';
+            li.innerHTML = `
+              <a href="${item.url}">
+                ${item.icon ? `<img src="${item.icon}" alt="" />` : ''}
+                ${item.title}
+              </a>
+            `;
+            list.appendChild(li);
+          });
+        });
+    </script>
+    <script >
+        document.getElementById('openContact').addEventListener('click', () => {
+          document.getElementById('contactModal').style.display = 'flex';
+        });
+        
+        document.querySelector('.close-button').addEventListener('click', () => {
+          document.getElementById('contactModal').style.display = 'none';
+        });
+        
+        window.addEventListener('click', (e) => {
+          if (e.target.id === 'contactModal') {
+            document.getElementById('contactModal').style.display = 'none';
+          }
+        });
+    </script>
+   
+</body>
+</html>

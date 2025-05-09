@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anony Hackz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+   
+    <img src="Avator/Logo.png" alt="AnonyHackz Logo" class="logo">
+    <nav>
+     
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#" id="openContact">Contact</a></li>
+        <li><a href="#" id="openLogin">Login</a></li>
+        <li><a href="#" id="openSignup">Sign Up</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="search">
+    <h2>Find Your Dream Courses</h2>
+    <input type="text" id="searchInput" placeholder="Search internships...">
+  </section>
+
+  <section id="courses">
+    <h3 style="color: white;">Available Courses</h3>
+    <div class="course-list" id="courseList">
+      <div class="course-card" data-role="Computing" data-link="CC_index.html">
+        <h4>Cloud Computing</h4>
+        <p>Source: Anony Hackz</p>
+        <p>Buy it: 1500 rs</p>
+      </div>
+      <div class="course-card" data-role="Programming">
+        <h4>Python</h4>
+        <p>Source: Anony Hackz</p>
+        <p>Location: Remote</p>
+      </div>
+      <div class="course-card" data-role="Defence">
+        <h4>Cyber Security</h4>
+        <p>Source: Anony Hackz</p>
+        <p>Location: Remote</p>
+      </div>
+      
+       <div class="course-card" data-role="Networking">
+        <h4>Networking</h4>
+        <p>Source: Anony Hackz</p>
+        <p>Location: Remote</p>
+      </div>
+       <div class="course-card" data-role="Front end dewoloper">
+        <h4>HTML</h4>
+        <p>Source: Anony Hackz</p>
+        <p>Location: Remote</p>
+      </div>
+       <div class="course-card" data-role="Front end dewoloper">
+        <h4>JavaScript</h4>
+        <p>Source: Anony Hackz</p>
+        <p>Location: Remote</p>
+      </div>
+       <div class="course-card" data-role="Front end dewoloper">
+        <h4>CSS</h4>
+        <p>Source: Anony Hackz</p>
+        <p>Location: Remote</p>
+      </div>
+      
+      
+   
+      
+      
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+  <section id="contactModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h3>Contact Us</h3>
+        <form>
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+          <textarea placeholder="Your Message" required></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    
+  </section>
+
+
+
+
+  <section id="about-platform" style="padding: 20px; background-color: #f9f9f9;">
+    <h3>About Anony Hackz</h3>
+    <p>
+      <strong>Anony Hackz</strong> offers a wide range of online courses designed to empower learners in areas like cloud computing, cybersecurity, programming, and web development. With a focus on accessibility and real-world skills, the platform provides flexible, remote learning experiences tailored for students and professionals alike. Whether you're looking to explore new technologies or deepen your expertise, Anony Hackz delivers high-quality, project-based learning at affordable prices.
+    </p>
+  </section>
+
+
+
+  
+
+
+  <section id="auth-section" style="padding: 20px; background-color: #f0f0f0;">
+ <!-- Login Modal -->
+      <div id="loginModal" class="modal">
+        <div class="modal-content">
+          <span class="close-button" onclick="closeModal('loginModal')">&times;</span>
+          <h3>Login</h3>
+          <form>
+            <input type="email" placeholder="Email" required><br>
+            <input type="password" placeholder="Password" required><br>
+            <button type="submit">Login</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Signup Modal -->
+      <div id="signupModal" class="modal">
+        <div class="modal-content">
+          <span class="close-button" onclick="closeModal('signupModal')">&times;</span>
+          <h3>Sign Up</h3>
+          <form>
+            <input type="text" placeholder="Full Name" required><br>
+            <input type="email" placeholder="Email" required><br>
+            <input type="password" placeholder="Create Password" required><br>
+            <button type="submit">Sign Up</button>
+          </form>
+        </div>
+      </div>
+
+  </section>
+
+
+  <footer style="text-align: center;">
+    <img src="Avator/Logo_footer.png" alt="AnonyHackz Logo" class="logo_footer">
+    <br>
+    <a href="mailto:anonyhackz741@gmail.com" style="text-decoration: none; color: blanchedalmond;">anonyhackz741@gmail.com</a>
+    <p>&copy; 2025 AnonyHackz. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
+

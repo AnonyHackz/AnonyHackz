@@ -1,0 +1,213 @@
+#topics {
+  border: solid 10px;
+  display: flex;
+  width: 100%; /* Full width on all screens */
+  max-width: 400px; /* Optional max width for layout control */
+}
+
+#topics a {
+  display: block;
+  padding: 10px;
+  margin: 0;
+  text-decoration: none;
+  color: black;
+  border: 1px solid #ccc; /* Border for each link */
+  background-color: #fff;
+}
+
+#topics a:hover {
+  background-color: #f0f0f0; /* Optional: hover effect */
+}
+.sticky-header {
+  position: sticky;
+  top: 0;
+  background-color: #f3f3f3; /* match your sidebar background */
+  padding: 10px;
+  font-weight: bold;
+  z-index: 10;
+  border-bottom: 1px solid #ccc;
+}
+/* Scrollable menuList styling */
+.menu-mobile__list-container {
+  height: min(calc(90vw * 1.2), 760px); /* Scales with width, caps at 600px */
+  overflow-y: auto;
+  width: 90vw;
+  margin: 10px auto;
+  
+}
+
+
+.profile {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; /* if you want it circular */
+}
+
+
+
+
+.main-layout {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  flex-direction: row;
+  height: calc(100vh - 100px); /* Adjust based on header/footer height */
+  overflow: hidden;
+}
+
+/* Left side (Topics) */
+
+
+/* Right side (Content) */
+.content {
+  flex: 3;
+  background-color: #fff;
+  padding: 20px;
+  border: 2px solid #ccc;
+}
+
+
+
+
+
+.content h2{
+  height: min(calc(90vw * 1.2)px); /* Scales with width, caps at 600px */
+  overflow-y: auto;
+  width: 90vw;
+  margin: 10px auto;
+  
+ 
+}
+
+
+
+
+
+/* Default: Desktop view - side by side */
+.main-layout {
+  
+}
+
+
+
+
+/* Content */
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+
+
+
+/* Mobile view: stack vertically */
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column;
+    height: auto; /* Let it grow naturally */
+  }
+
+  #topics {
+    width: 100%;
+    max-width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .content {
+    overflow: visible;
+    padding: 16px;
+  }
+}
+
+
+
+
+
+
+
+
+
+/* Desktop layout: side by side 
+.main-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 20px;
+  height: calc(100vh - 100px); /* Adjust according to header/footer 
+  overflow: hidden;
+}
+
+/* Topics section */
+#topics {
+  flex: 1;
+  max-width: 400px;
+  border: 2px solid #ccc;
+  overflow-y: auto;
+}
+
+/* Each anchor styled like table cell */
+#topics a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+#topics a:hover {
+  background-color: #f0f0f0;
+}
+
+
+
+/* Content area */
+.content {
+  flex: 3;
+  background-color: #fff;
+  padding: 20px;
+  border: 2px solid #ccc;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.content h2{
+  color: rgb(226, 5, 115);
+}
+.content span{
+  width: 1vmax;
+}
+
+/* Mobile layout: stack vertically */
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  #topics {
+    order: -1;
+    width: 100%;
+    max-width: 100%;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .content {
+    width: 100%;
+    overflow: visible;
+    padding: 16px;
+  }
+
+  body {
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+
+  html {
+    overflow-x: hidden;
+  }
+}
