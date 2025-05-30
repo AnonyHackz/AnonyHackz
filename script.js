@@ -1,129 +1,101 @@
-document.getElementById('searchInput').addEventListener('input', function() {
-  const searchValue = this.value.toLowerCase();
-  const cards = document.querySelectorAll('.course-card');
+// Search filter for course cards
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('searchInput');
+  const courseCards = document.querySelectorAll('.course-card');
 
-  cards.forEach(card => {
-    const text = card.textContent.toLowerCase();
-    card.style.display = text.includes(searchValue) ? 'block' : 'none';
+  if (searchInput) {
+    searchInput.addEventListener('input', function () {
+      const searchValue = this.value.toLowerCase();
+      courseCards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(searchValue) ? 'block' : 'none';
+      });
+    });
+  }
+
+  // Attach click events to course cards to load course page
+  courseCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const publicId = card.getAttribute('data-link');
+      const page = 1;
+      if (publicId) {
+        loadPage(publicId, page);
+        history.pushState({ publicId, page }, '', `?page=${page}&id=${publicId}`);
+      }
+    });
   });
-});
 
-// Open course link in the same tab
-document.querySelectorAll('.course-card').forEach(card => {
-  card.addEventListener('click', () => {
-    const link = card.getAttribute('data-link');
-    if (link) {
-      window.location.href = link; // open in same tab
+  // Contact Modal
+  const contactModal = document.getElementById('contactModal');
+  const openContact = document.getElementById('openContact');
+  const closeButton = document.querySelector('.close-button');
+
+  if (openContact && contactModal) {
+    openContact.addEventListener('click', () => {
+      contactModal.style.display = 'flex';
+    });
+
+    closeButton?.addEventListener('click', () => {
+      contactModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === contactModal) {
+        contactModal.style.display = 'none';
+      }
+    });
+  }
+
+  // Login / Signup Modals
+  ['loginModal', 'signupModal'].forEach(modalId => {
+    const openBtn = document.getElementById(`open${modalId.replace('Modal', '')}`);
+    const modal = document.getElementById(modalId);
+
+    if (openBtn && modal) {
+      openBtn.addEventListener('click', () => modal.style.display = 'flex');
+
+      window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
     }
   });
-});
 
-
-// account section
-function openModal(id) {
-  document.getElementById(id).style.display = "flex";
-}
-
-function closeModal(id) {
-  document.getElementById(id).style.display = "none";
-}
-
-// Attach event listeners
-document.getElementById('openLogin').addEventListener('click', () => openModal('loginModal'));
-document.getElementById('openSignup').addEventListener('click', () => openModal('signupModal'));
-
-// Close modals when clicking outside
-window.addEventListener('click', function(event) {
-  ['loginModal', 'signupModal'].forEach(id => {
-    const modal = document.getElementById(id);
-    if (event.target === modal) modal.style.display = "none";
-  });
-});
-
-
-// Contact section
-document.getElementById('openContact').addEventListener('click', () => {
-  document.getElementById('contactModal').style.display = 'flex';
-});
-
-document.querySelector('.close-button').addEventListener('click', () => {
-  document.getElementById('contactModal').style.display = 'none';
-});
-
-window.addEventListener('click', (e) => {
-  if (e.target.id === 'contactModal') {
-    document.getElementById('contactModal').style.display = 'none';
+  // Load page from URL if query parameters exist
+  const params = new URLSearchParams(window.location.search);
+  const page = parseInt(params.get('page')) || 1;
+  const publicId = params.get('id');
+  if (publicId) {
+    loadPage(publicId, page);
   }
 });
 
-
-
-
-
-
-  // Load and inject full HTML content into the document
- function loadPage(publicId, page = 1) {
-  fetch('http://localhost:3000/course', {
+// Load and inject course content
+function loadPage(publicId, page) {
+  fetch('https://d9e9300c53203aeb0e5cbec2b80c6e59.serveo.net/course', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ publicId, page }),
   })
-    .then(res => {
-      if (!res.ok) throw new Error("Failed to fetch course HTML");
-      return res.text();
-    })
-    .then(html => {
-      const win = window.open('', '_blank');
-      if (win) {
-        win.document.open();
-        win.document.write(html);
-        win.document.close();
-      } else {
-        alert("Please allow popups!");
-      }
-    })
-    .catch(err => {
-      console.error('Failed to load page:', err);
-    });
+  .then(response => {
+    if (!response.ok) throw new Error(`Failed to load content: ${response.statusText}`);
+    return response.text();
+  })
+  .then(html => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    document.body.innerHTML = doc.body.innerHTML;
+  })
+  .catch(error => {
+    console.error('Error loading page:', error);
+  });
 }
 
-
-
-  // Set up course card click handlers and handle first-load + history
-  document.addEventListener('DOMContentLoaded', () => {
-    const cards = document.querySelectorAll('.course-card');
-
-    // Handle course card clicks
-    cards.forEach(card => {
-      card.addEventListener('click', () => {
-        const publicId = card.getAttribute('data-link');
-        if (!publicId) {
-          console.warn('No publicId found on clicked card');
-          return;
-        }
-
-        console.log("Clicked course link:", publicId);
-
-        const page = 1;
-        loadPage(publicId, page);
-        history.pushState({ publicId, page }, '', `?page=${page}&id=${publicId}`);
-      });
-    });
-
-    // Load course content if URL has params on initial load
-    const params = new URLSearchParams(window.location.search);
-    const page = parseInt(params.get('page')) || 1;
-    const publicId = params.get('id');
-    if (publicId) {
-      loadPage(publicId, page);
-    }
-  });
-
-  // Handle back/forward browser navigation
-  window.onpopstate = function (event) {
-    if (event.state) {
-      const { publicId, page } = event.state;
-      loadPage(publicId, page);
-    }
-  };
-
+// Handle browser back/forward navigation
+window.onpopstate = function (event) {
+  if (event.state) {
+    const { publicId, page } = event.state;
+    loadPage(publicId, page);
+  }
+};
